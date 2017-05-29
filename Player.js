@@ -32,8 +32,6 @@ Player.prototype.update = function (dt) {
 Player.prototype.desenha = function (contexto) {
     contexto.save()
     contexto.translate(0,0);
-    contexto.rotate(Math.PI/5);
-    //contexto.fillRect(this.x,this.y,this.width,this.height);
     contexto.drawImage(
         this.image,
         this.quadro * (this.image.width / this.numero_de_frames),
@@ -45,6 +43,7 @@ Player.prototype.desenha = function (contexto) {
         this.width,
         this.height);
     contexto.restore();
+
 }
 
 Player.prototype.mover = function (dt) {

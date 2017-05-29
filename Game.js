@@ -13,6 +13,15 @@ var inicia_jogo = false;
 var flappy = new Image();
 flappy.src = 'img/flappy.png';
 
+function inicializaPlayer(){
+    player.x  = 400;
+    player.y  = 275;
+    player.vy = 10;
+    player.gravidade = 0;
+    player.width  = 50;
+    player.height = 50;
+    player.image  = flappy;
+}
 
 function init(){
 
@@ -20,13 +29,7 @@ function init(){
     contexto = tela.getContext('2d');
 
     player = new Player();
-    player.x  = 500;
-    player.y  = 0;
-    player.vy = 10;
-    player.gravidade = 0;
-    player.width  = 50;
-    player.height = 50;
-    player.image  = flappy;
+    inicializaPlayer();
 
     level = new Level();
     initControls();
@@ -40,7 +43,12 @@ function init(){
     contexto.clearRect(0,0, tela.width, tela.height);
 
     if(inicia_jogo){
-        level.run(dt,contexto);
+        if(!level.run(dt,contexto, player)){
+            inicia_jogo = false;
+            inicializaPlayer();
+            level = new Level();
+            alert("Fim de Jogo");
+        }
     }else{
         contexto.font = "50px Arial";
         contexto.strokeText("FLAPPY BIRD",250,250);
@@ -74,7 +82,7 @@ function initControls(){
     addEventListener('keyup', function(e){
         switch (e.keyCode){
             case 32 :
-                player.vy = 10;
+                player.vy = 20;
                 break;
         }
     });
