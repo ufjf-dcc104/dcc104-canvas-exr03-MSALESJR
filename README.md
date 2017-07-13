@@ -1,4 +1,3 @@
-#dcc104-canvas-exr01-MSALESJR
 ```
 
 # Implementação do Game - Flappy
